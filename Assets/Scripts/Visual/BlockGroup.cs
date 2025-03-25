@@ -16,6 +16,7 @@ public class BlockGroup : MonoBehaviour
     private PlayerType playerType;
     private bool isMoving = false;
     private bool isControlled = false;
+    private bool isDetaching = false;
     private const float MoveSpeed = 7f;
 
     void Awake()
@@ -36,10 +37,19 @@ public class BlockGroup : MonoBehaviour
 
     private void Block_OnBlockDestroyed(object sender, EventArgs e)
     {
-        if(transform.childCount == 0)
+        if(isDetaching) return;
+
+        isDetaching = true;
+        foreach (Transform child in transform)
         {
-            Destroy(gameObject);
+            if(child.GetComponent<Block>() == (Block)sender) continue;
+
+            Rigidbody2D childrb = child.gameObject.AddComponent<Rigidbody2D>();
+            childrb.freezeRotation = true;
+            child.parent = null;
         }
+        
+        Destroy(gameObject);
     }
 
     public void Rotate()

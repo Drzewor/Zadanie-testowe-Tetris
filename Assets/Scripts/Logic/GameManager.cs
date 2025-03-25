@@ -115,7 +115,7 @@ public class GameManager : MonoBehaviour
             {
                 foreach (RaycastHit2D hit in hitArray)
                 {
-                    Destroy(hit.collider.gameObject);
+                    hit.collider.GetComponent<Block>().DestroyBlock();
                 }
                 pointsCounter.IncreasePoints(e.playerType);
             }

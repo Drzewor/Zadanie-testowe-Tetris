@@ -5,8 +5,9 @@ public class Block : MonoBehaviour
 {
     public event EventHandler OnBlockDestroyed;
 
-    private void OnDestroy() 
+    public void DestroyBlock()
     {
         OnBlockDestroyed?.Invoke(this,EventArgs.Empty);
+        Destroy(gameObject);
     }
 }
