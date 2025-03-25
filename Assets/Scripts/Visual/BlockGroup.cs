@@ -35,6 +35,8 @@ public class BlockGroup : MonoBehaviour
         } 
     }
 
+    // when One of blocks i group is destroyed group is detach, every block gets its own Rigidbody2D so it can fall
+    // on his own. Also Destroy this BlockGroup at the end.
     private void Block_OnBlockDestroyed(object sender, EventArgs e)
     {
         if(isDetaching) return;
@@ -52,6 +54,9 @@ public class BlockGroup : MonoBehaviour
         Destroy(gameObject);
     }
 
+    /// <summary>
+    /// Rotate this BlockGroup by 90 degrees
+    /// </summary>
     public void Rotate()
     {
         float newRotation = rb.rotation + 90;
@@ -59,6 +64,10 @@ public class BlockGroup : MonoBehaviour
         transform.rotation = Quaternion.Euler(newEuler);
     }
 
+    /// <summary>
+    /// Move this BlockGroup by 1 in left or right, depending on moveValue
+    /// </summary>
+    /// <param name="moveValue"></param>
     public void MoveGroup(float moveValue)
     {
         if(isMoving) return;
@@ -67,6 +76,12 @@ public class BlockGroup : MonoBehaviour
         currentCoroutine = StartCoroutine(MoveToPosition(moveDirection));
     }
 
+    /// <summary>
+    /// Smoothly move group by 1 in given direction wiile keeping gravity fall velocity. At end its snap 
+    /// whole group exactly at desire position.
+    /// </summary>
+    /// <param name="moveDirection"></param>
+    /// <returns></returns>
     private IEnumerator MoveToPosition(Vector2 moveDirection)
     {
         isMoving = true;
@@ -86,6 +101,8 @@ public class BlockGroup : MonoBehaviour
         currentCoroutine = null;
     }
 
+    //When block group hit somthing its automaticly snap to nearest round x position. When its valid target like 
+    //floor of arena or other blocks it invoke OnValidCollision event.
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.tag == "Floor" || collision.gameObject.tag == "Block")
@@ -110,6 +127,10 @@ public class BlockGroup : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// When group hit somthing np. wall its cannot be move again for 1 second 
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator MoveCoolDown()
     {
         yield return new WaitForSeconds(1f);

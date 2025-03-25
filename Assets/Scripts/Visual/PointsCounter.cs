@@ -14,6 +14,10 @@ public class PointsCounter : MonoBehaviour
         PlayerTwoPointsText.text = "0";
     }
 
+    /// <summary>
+    /// Increase points and update textMeshPor with points display
+    /// </summary>
+    /// <param name="playerType"></param>
     public void IncreasePoints(PlayerType playerType)
     {
         TextMeshProUGUI textMeshPro;

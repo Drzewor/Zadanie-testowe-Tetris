@@ -7,6 +7,12 @@ public class BorderLine : MonoBehaviour
     [SerializeField] private Transform PlayerTwoRaycastPoint;
     [SerializeField] private LayerMask blockLayerMask;
 
+    /// <summary>
+    /// Return true if any Block cross line of the border of given player;
+    /// </summary>
+    /// <param name="distance"></param>
+    /// <param name="playerType"></param>
+    /// <returns></returns>
     public bool HasBlocksOnLine(float distance, PlayerType playerType)
     {
         Transform raycastPoint;

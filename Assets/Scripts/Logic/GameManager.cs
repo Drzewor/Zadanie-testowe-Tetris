@@ -15,6 +15,9 @@ public class GameManager : MonoBehaviour
     private BorderLine borderLine;
     private PointsCounter pointsCounter;
 
+    /// <summary>
+    /// Call to prepare and activate GameManager and start spawning Blocks.
+    /// </summary>
     public void SetUp()
     {
         spawner = FindFirstObjectByType<BlockGroupSpawner>();
@@ -36,6 +39,7 @@ public class GameManager : MonoBehaviour
         HandlePlayerTwoInputs();
     }
 
+    //Handle Inputs form First (Left) Player
     private void HandlePlayerOneInputs()
     {
         if(!isPlayerOnePlaying) return;
@@ -51,6 +55,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //Handle Inputs form Second (Right) Player
     private void HandlePlayerTwoInputs()
     {
         if(!isPlayerTwoPlaying) return;
@@ -66,10 +71,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //Called when blockGroup collide with floor or other block. 
     private void blockGroup_OnValidCollision(object sender, BlockGroup.OnValidCollisionEventArgs e)
     {
         BlockGroup blockGroup;
 
+        //Chcek if blockgorup is not crossing border (arena top) and assing wich BlockGroup should be handled
+        //depends on playerType
         switch (e.playerType)
         {
             case PlayerType.PlayerOne:
@@ -101,6 +109,8 @@ public class GameManager : MonoBehaviour
                 return;
         }
 
+        //if event is called by BlockGroup that player controll then control is taken from block and new BlockGroup
+        //is spawned
         if(e.isControlled)
         {
             blockGroup.SetIsController(false);
@@ -109,6 +119,7 @@ public class GameManager : MonoBehaviour
             SpawnNextBlockGroup(e.playerType);
         }
 
+        //checki if there is any full line of blocks, and if it is then is destroyed and point is added
         for(float heightOffset = 0; heightOffset < arenaHeight; heightOffset++)
         {
             if(lineChecker.CheckLine(arenaWidht, heightOffset, e.playerType, out RaycastHit2D[] hitArray))
@@ -123,6 +134,10 @@ public class GameManager : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Spawn new BlockGroup for a given playerType
+    /// </summary>
+    /// <param name="playerType"></param>
     private void SpawnNextBlockGroup(PlayerType playerType)
     {
         switch (playerType)

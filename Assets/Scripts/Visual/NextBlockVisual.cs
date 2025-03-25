@@ -5,7 +5,11 @@ public class NextBlockVisual : MonoBehaviour
     [SerializeField] Transform blockSpawnPoint;
     private BlockGroup currentBlockGroup;
 
-    public void SpawnNextBlockVisualistaion(Transform blockGroup)
+    /// <summary>
+    /// Display given BlockGroup. If there is any currentBlockGroup then it is destroyed
+    /// </summary>
+    /// <param name="blockGroup"></param>
+    public void DisplayBlockVisualistaion(Transform blockGroup)
     {
         if(currentBlockGroup != null)
         {

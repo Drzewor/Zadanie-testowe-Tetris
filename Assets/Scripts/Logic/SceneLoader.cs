@@ -15,9 +15,8 @@ public class SceneLoader : MonoBehaviour
             Debug.LogError("Cannot find any objcet of type GameManager!");
         }
 
+        //When Scene with visuals is loaded gamemanger is SetUp;
         SceneManager.LoadSceneAsync(1,LoadSceneMode.Additive).completed += OnSceneLoadcompleted;
-        
-        
     }
 
     private void OnSceneLoadcompleted(AsyncOperation operation)

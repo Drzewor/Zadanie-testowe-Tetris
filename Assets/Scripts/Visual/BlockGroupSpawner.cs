@@ -11,6 +11,12 @@ public class BlockGroupSpawner : MonoBehaviour
     private int playerOneNextBlockIndex = 0;
     private int playerTwoNextBlockIndex = 0;
 
+    /// <summary>
+    /// Spawn new BlockGroup from blockGroupsPrefabList, then generate next blockgroup index and call NextBlockVisual
+    /// to dispaly next block
+    /// </summary>
+    /// <param name="playerType"></param>
+    /// <returns></returns>
     public BlockGroup SpawnNextBlocks(PlayerType playerType)
     {
         Transform spawnPoint;
@@ -22,13 +28,13 @@ public class BlockGroupSpawner : MonoBehaviour
                 spawnPoint = playerOneSpawnPoint;
                 nextBlockIndex = playerOneNextBlockIndex;
                 playerOneNextBlockIndex = Random.Range(0,blockGroupsPrefabList.Count);
-                playerOneNextBlockVisual.SpawnNextBlockVisualistaion(blockGroupsPrefabList[playerOneNextBlockIndex]);
+                playerOneNextBlockVisual.DisplayBlockVisualistaion(blockGroupsPrefabList[playerOneNextBlockIndex]);
                 break;
             case PlayerType.PlayerTwo:
                 spawnPoint = playerTwoSpawnPoint;
                 nextBlockIndex = playerTwoNextBlockIndex;
                 playerTwoNextBlockIndex = Random.Range(0,blockGroupsPrefabList.Count);
-                playerTwoNextBlockVisual.SpawnNextBlockVisualistaion(blockGroupsPrefabList[playerTwoNextBlockIndex]);
+                playerTwoNextBlockVisual.DisplayBlockVisualistaion(blockGroupsPrefabList[playerTwoNextBlockIndex]);
                 break;
             default:
                 return null;
