@@ -126,6 +126,15 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""OnEscPress"",
+                    ""type"": ""Button"",
+                    ""id"": ""240f9e57-f45e-45f8-ba4a-b8b1c7d8d571"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -214,6 +223,17 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
                     ""action"": ""PlayerTwoRotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0123d4af-2dbd-46b2-a65d-f91d8dfbfe37"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""OnEscPress"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -805,6 +825,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_Player1_PlayerOneRotate = m_Player1.FindAction("PlayerOneRotate", throwIfNotFound: true);
         m_Player1_PlayerTwoHorizontalMove = m_Player1.FindAction("PlayerTwoHorizontalMove", throwIfNotFound: true);
         m_Player1_PlayerTwoRotate = m_Player1.FindAction("PlayerTwoRotate", throwIfNotFound: true);
+        m_Player1_OnEscPress = m_Player1.FindAction("OnEscPress", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -902,6 +923,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player1_PlayerOneRotate;
     private readonly InputAction m_Player1_PlayerTwoHorizontalMove;
     private readonly InputAction m_Player1_PlayerTwoRotate;
+    private readonly InputAction m_Player1_OnEscPress;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player1".
     /// </summary>
@@ -929,6 +951,10 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player1/PlayerTwoRotate".
         /// </summary>
         public InputAction @PlayerTwoRotate => m_Wrapper.m_Player1_PlayerTwoRotate;
+        /// <summary>
+        /// Provides access to the underlying input action "Player1/OnEscPress".
+        /// </summary>
+        public InputAction @OnEscPress => m_Wrapper.m_Player1_OnEscPress;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -967,6 +993,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @PlayerTwoRotate.started += instance.OnPlayerTwoRotate;
             @PlayerTwoRotate.performed += instance.OnPlayerTwoRotate;
             @PlayerTwoRotate.canceled += instance.OnPlayerTwoRotate;
+            @OnEscPress.started += instance.OnOnEscPress;
+            @OnEscPress.performed += instance.OnOnEscPress;
+            @OnEscPress.canceled += instance.OnOnEscPress;
         }
 
         /// <summary>
@@ -990,6 +1019,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @PlayerTwoRotate.started -= instance.OnPlayerTwoRotate;
             @PlayerTwoRotate.performed -= instance.OnPlayerTwoRotate;
             @PlayerTwoRotate.canceled -= instance.OnPlayerTwoRotate;
+            @OnEscPress.started -= instance.OnOnEscPress;
+            @OnEscPress.performed -= instance.OnOnEscPress;
+            @OnEscPress.canceled -= instance.OnOnEscPress;
         }
 
         /// <summary>
@@ -1318,6 +1350,13 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnPlayerTwoRotate(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "OnEscPress" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnOnEscPress(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

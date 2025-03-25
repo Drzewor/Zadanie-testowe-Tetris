@@ -42,5 +42,10 @@ public class InputManager : MonoBehaviour
     {
         return playerOneInputActions.Player1.PlayerTwoRotate.WasPressedThisFrame();
     }
+
+    public bool IsESCButtonPressed()
+    {
+        return playerOneInputActions.Player1.OnEscPress.WasPressedThisFrame();
+    }
 }
 

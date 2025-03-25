@@ -37,6 +37,11 @@ public class GameManager : MonoBehaviour
         HandlePlayerOneInputs();
         
         HandlePlayerTwoInputs();
+
+        if(InputManager.Instance.IsESCButtonPressed())
+        {
+            Application.Quit();
+        }
     }
 
     //Handle Inputs form First (Left) Player
